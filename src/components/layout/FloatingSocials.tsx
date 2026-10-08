@@ -4,7 +4,7 @@ export default function FloatingSocials() {
   const whatsappUrl = `https://wa.me/${WORKSHOP_CONFIG.contact.whatsappNumber}`;
   
   return (
-    <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 flex-col gap-2 z-50 p-2">
+    <div className="flex fixed right-0 top-1/2 -translate-y-1/2 flex-col gap-2 z-[90] p-1 scale-75 origin-right md:scale-100 md:p-2">
       {/* WhatsApp (Outline Style) */}
       <a 
         href={whatsappUrl} 

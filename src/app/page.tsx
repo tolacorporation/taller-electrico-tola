@@ -82,26 +82,26 @@ export default function Home() {
         <div className="text-center mb-6">
           <p className="text-sm font-bold uppercase tracking-widest text-slate-400">Especialistas Multimarca</p>
         </div>
-        <div className="flex overflow-hidden group border-y border-slate-100 bg-slate-50 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex overflow-hidden group border-y border-slate-100 bg-slate-50 md:[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <div className="flex shrink-0 animate-marquee items-center py-6">
-            {CAR_BRANDS.map((brand, i) => (
+            {[...CAR_BRANDS, ...CAR_BRANDS].map((brand, i) => (
               <img 
                 key={i} 
                 src={`https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/optimized/${brand}.png`} 
                 alt={`Logo ${brand}`}
                 loading="lazy"
-                className="mx-8 h-12 md:h-14 w-auto shrink-0 object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="mx-4 md:mx-8 h-10 md:h-14 w-auto shrink-0 object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
               />
             ))}
           </div>
           <div className="flex shrink-0 animate-marquee items-center py-6" aria-hidden="true">
-            {CAR_BRANDS.map((brand, i) => (
+            {[...CAR_BRANDS, ...CAR_BRANDS].map((brand, i) => (
               <img 
-                key={i + CAR_BRANDS.length} 
+                key={i + CAR_BRANDS.length * 2} 
                 src={`https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/optimized/${brand}.png`} 
                 alt={`Logo ${brand}`}
                 loading="lazy"
-                className="mx-8 h-12 md:h-14 w-auto shrink-0 object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="mx-4 md:mx-8 h-10 md:h-14 w-auto shrink-0 object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
               />
             ))}
           </div>
@@ -211,27 +211,30 @@ export default function Home() {
               </div>
 
               {/* Map Panel con Overlay UX Pro */}
-              <div className="lg:col-span-8 bg-slate-200 rounded-2xl overflow-hidden relative min-h-[400px] group">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30458.920711511193!2d-66.26766060540788!3d-17.394258345124005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e30b0020f5ac11%3A0x647d39fdf15b1c48!2sTALLER%20ELECTRICO%20Y%20ELECTRONICO%20AUTOMOTRIZ%20%22TOLA%22!5e0!3m2!1ses!2sbo!4v1791385413118!5m2!1ses!2sbo" 
-                  className="absolute inset-0 w-full h-full border-0 grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
-                  allowFullScreen={false} 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
-                
-                {/* Botón flotante para GPS (Visible siempre en móvil, visible en hover en desktop) */}
-                <div className="absolute inset-0 pointer-events-none flex items-end justify-center pb-8">
-                  <a 
-                    href={WORKSHOP_CONFIG.contact.googleMapsEmbedUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="pointer-events-auto bg-slate-900 text-white font-bold py-3 px-6 rounded-xl shadow-2xl flex items-center gap-2 hover:bg-red-600 hover:-translate-y-1 transition-all duration-300 md:opacity-0 md:group-hover:opacity-100"
-                  >
-                    <MapPin className="w-5 h-5" />
-                    Abrir en Google Maps (GPS)
-                  </a>
+              <div className="lg:col-span-8 flex flex-col gap-4">
+                <div className="bg-slate-200 rounded-2xl overflow-hidden relative min-h-[300px] md:min-h-[400px] group flex-1">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30458.920711511193!2d-66.26766060540788!3d-17.394258345124005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e30b0020f5ac11%3A0x647d39fdf15b1c48!2sTALLER%20ELECTRICO%20Y%20ELECTRONICO%20AUTOMOTRIZ%20%22TOLA%22!5e0!3m2!1ses!2sbo!4v1791385413118!5m2!1ses!2sbo" 
+                    className="absolute inset-0 w-full h-full border-0 grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none md:pointer-events-auto" 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
+                  {/* Overlay for mobile to indicate they should use the button */}
+                  <div className="absolute inset-0 flex items-center justify-center md:hidden bg-black/5 pointer-events-none">
+                  </div>
                 </div>
+                
+                {/* Botón flotante para GPS (Visible siempre debajo en móvil, visible en hover en desktop) */}
+                <a 
+                  href={WORKSHOP_CONFIG.contact.googleMapsEmbedUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-slate-900 text-white font-bold py-4 md:py-3 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 hover:bg-red-600 transition-all duration-300 md:absolute md:bottom-8 md:left-1/2 md:-translate-x-1/2 md:opacity-0 md:group-hover:opacity-100 md:shadow-2xl z-10 w-full md:w-auto"
+                >
+                  <MapPin className="w-5 h-5" />
+                  Abrir en Google Maps (Navegar)
+                </a>
               </div>
             </div>
           </ScrollReveal>
