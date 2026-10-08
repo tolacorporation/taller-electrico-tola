@@ -8,7 +8,7 @@ export default function StatsCounter() {
   const domRef = useRef<HTMLDivElement>(null);
   
   const [stats, setStats] = useState([
-    { label: "Años de Experiencia", value: 0, target: 25, suffix: "+" },
+    { label: "Años de Experiencia", value: 0, target: 30, suffix: "+" },
     { label: "Autos Diagnosticados", value: 0, target: 10000, suffix: "+" },
     { label: "Escáneres Avanzados", value: 0, target: 4, suffix: "" },
     { label: "Clientes Satisfechos", value: 0, target: 100, suffix: "%" }
