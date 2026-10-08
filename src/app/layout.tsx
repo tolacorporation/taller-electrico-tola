@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hero-bg.jpg', // Usamos el hero como imagen al compartir
+        url: '/logotola2.webp', // Logotipo oficial
         width: 1200,
-        height: 630,
+        height: 630, // Redes sociales suelen preferir esta proporción
         alt: 'Taller Eléctrico y Electrónico TOLA - Cochabamba',
       }
     ],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${SITE_CONFIG.name} | Servicio Técnico Automotriz`,
     description: SITE_CONFIG.description,
-    images: ['/hero-bg.jpg'],
+    images: ['/logotola2.webp'],
   },
   robots: {
     index: true,
