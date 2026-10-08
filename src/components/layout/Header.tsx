@@ -16,6 +16,28 @@ export default function Header() {
     <span key="3" className="flex items-center gap-2"><PhoneCall className="w-4 h-4 text-white" aria-hidden="true"/> Asistencia: <span className="text-white font-black">{WORKSHOP_CONFIG.contact.displayNumber}</span></span>
   ];
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    if (window.location.pathname !== '/') {
+      window.location.href = `/#${id}`;
+      return;
+    }
+
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 100; // Ajuste para el header fijo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setMsgIndex((current) => (current + 1) % TOP_MESSAGES.length);
@@ -47,11 +69,11 @@ export default function Header() {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               <nav className="flex gap-8">
-                <Link href="#servicios" className="text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors">Servicios</Link>
-                <Link href="#contacto" className="flex items-center gap-1.5 text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors">
+                <a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer">Servicios</a>
+                <a href="#contacto" onClick={(e) => scrollToSection(e, 'contacto')} className="flex items-center gap-1.5 text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer">
                   <Navigation className="w-4 h-4" /> Ubicación
-                </Link>
-                <Link href="#reservas" className="text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors">Contacto</Link>
+                </a>
+                <a href="#reservas" onClick={(e) => scrollToSection(e, 'reservas')} className="text-slate-300 hover:text-red-600 font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer">Contacto</a>
               </nav>
             </div>
 
@@ -70,11 +92,11 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-slate-900 border-t border-slate-800 absolute w-full left-0 shadow-xl pb-4">
             <nav className="flex flex-col px-4 pt-2">
-              <Link href="#servicios" onClick={() => setIsMobileMenuOpen(false)} className="py-4 text-slate-300 font-bold uppercase tracking-wider border-b border-slate-800">Servicios</Link>
-              <Link href="#contacto" onClick={() => setIsMobileMenuOpen(false)} className="py-4 flex items-center gap-2 text-slate-300 font-bold uppercase tracking-wider border-b border-slate-800">
+              <a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="py-4 text-slate-300 font-bold uppercase tracking-wider border-b border-slate-800 cursor-pointer">Servicios</a>
+              <a href="#contacto" onClick={(e) => scrollToSection(e, 'contacto')} className="py-4 flex items-center gap-2 text-slate-300 font-bold uppercase tracking-wider border-b border-slate-800 cursor-pointer">
                 <Navigation className="w-5 h-5 text-slate-400" /> Ubicación
-              </Link>
-              <Link href="#reservas" onClick={() => setIsMobileMenuOpen(false)} className="py-4 text-slate-300 font-bold uppercase tracking-wider">Contacto</Link>
+              </a>
+              <a href="#reservas" onClick={(e) => scrollToSection(e, 'reservas')} className="py-4 text-slate-300 font-bold uppercase tracking-wider cursor-pointer">Contacto</a>
             </nav>
           </div>
         )}

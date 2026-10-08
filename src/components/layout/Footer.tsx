@@ -5,6 +5,21 @@ import { ShieldCheck, Wrench, Award } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Footer() {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    if (window.location.pathname !== '/') {
+      window.location.href = `/#${id}`;
+      return;
+    }
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="bg-slate-900 text-slate-300 py-16 border-t-[6px] border-red-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -31,10 +46,10 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-bold mb-5 uppercase tracking-wider text-sm">Servicios Clave</h4>
           <ul className="space-y-3 text-sm">
-            <li><a href="#servicios" className="hover:text-red-600 transition-colors flex items-center gap-2"><span className="text-red-600 text-xs">▸</span> Diagnóstico Computarizado</a></li>
-            <li><a href="#servicios" className="hover:text-red-600 transition-colors flex items-center gap-2"><span className="text-red-600 text-xs">▸</span> Electrónica Automotriz</a></li>
-            <li><a href="#servicios" className="hover:text-red-600 transition-colors flex items-center gap-2"><span className="text-red-600 text-xs">▸</span> Mantenimiento Preventivo</a></li>
-            <li><a href="#servicios" className="hover:text-red-600 transition-colors flex items-center gap-2"><span className="text-red-600 text-xs">▸</span> Inyección Electrónica</a></li>
+            <li><a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="hover:text-red-600 transition-colors flex items-center gap-2 cursor-pointer"><span className="text-red-600 text-xs">▸</span> Diagnóstico Computarizado</a></li>
+            <li><a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="hover:text-red-600 transition-colors flex items-center gap-2 cursor-pointer"><span className="text-red-600 text-xs">▸</span> Electrónica Automotriz</a></li>
+            <li><a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="hover:text-red-600 transition-colors flex items-center gap-2 cursor-pointer"><span className="text-red-600 text-xs">▸</span> Mantenimiento Preventivo</a></li>
+            <li><a href="#servicios" onClick={(e) => scrollToSection(e, 'servicios')} className="hover:text-red-600 transition-colors flex items-center gap-2 cursor-pointer"><span className="text-red-600 text-xs">▸</span> Inyección Electrónica</a></li>
           </ul>
         </div>
         

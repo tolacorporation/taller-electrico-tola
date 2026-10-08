@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import DynamicTitle from '@/components/ui/DynamicTitle';
 import EmergencyCTA from '@/components/features/EmergencyCTA';
 import FAQ from '@/components/features/FAQ';
@@ -5,6 +6,7 @@ import StatsCounter from '@/components/features/StatsCounter';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import BookingButton from '@/components/ui/BookingButton';
 import MapNavigationButton from '@/components/ui/MapNavigationButton';
+import BrandsCarousel from '@/components/features/BrandsCarousel';
 import { SITE_CONFIG } from '@/config/site';
 import { WORKSHOP_CONFIG } from '@/config/business';
 import { Settings, Cpu, Activity, Zap, AlertTriangle, Wrench, ShieldAlert, Wind, BatteryCharging, CalendarCheck, Star, Phone, MapPin, Mail, Key, Network, Car, Truck, Motorbike } from 'lucide-react';
@@ -25,13 +27,6 @@ const iconMap: Record<string, React.ReactNode> = {
   MotorbikeIcon: <Motorbike className="w-10 h-10 text-red-600 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12" aria-hidden="true" />
 };
 
-const CAR_BRANDS = [
-  "toyota", "nissan", "volkswagen", "ford", "chevrolet", 
-  "hyundai", "kia", "honda", "bmw", "audi", 
-  "suzuki", "mazda", "changan", "jac", "chery", 
-  "haval", "geely", "foton"
-];
-
 const TESTIMONIALS = [
   { name: "Carlos M.", vehicle: "Toyota Hilux", text: "El diagnóstico por escáner fue súper preciso. Arreglaron el problema eléctrico que otros tres talleres no pudieron encontrar. Muy recomendados." },
   { name: "Andrea V.", vehicle: "Nissan Versa", text: "Excelente servicio y mucha honestidad. Me explicaron exactamente qué fallaba en el aire acondicionado antes de empezar a trabajar." },
@@ -45,11 +40,16 @@ export default function Home() {
     <div className="flex flex-col bg-slate-100">
       {/* Hero Section con Imagen Generada por IA */}
       <section className="relative bg-slate-900 pt-20 pb-28 md:pt-32 md:pb-40 text-center px-4 overflow-hidden">
-        {/* Imagen de fondo Tech/Scanner */}
-        <div 
-          className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center bg-no-repeat opacity-25"
+        {/* Imagen de fondo Tech/Scanner (Optimizado para LCP) */}
+        <Image 
+          src="/hero-bg.jpg" 
+          alt="Taller Eléctrico Automotriz" 
+          fill
+          priority
+          quality={80}
+          className="object-cover opacity-25 pointer-events-none"
           style={{ mixBlendMode: 'luminosity' }}
-        ></div>
+        />
         {/* Overlays de oscurecimiento y cuadrícula para asegurar legibilidad */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
@@ -78,25 +78,8 @@ export default function Home() {
       {/* Stats Counter Section */}
       <StatsCounter />
 
-      {/* Brands Grid (Social Proof) */}
-      <section className="py-12 bg-white border-b border-slate-200">
-        <div className="text-center mb-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-slate-400">Especialistas Multimarca</p>
-        </div>
-        <div className="border-y border-slate-100 bg-slate-50 py-8 px-4">
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 max-w-5xl mx-auto">
-            {CAR_BRANDS.map((brand, i) => (
-              <img 
-                key={i} 
-                src={`https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/optimized/${brand}.png`} 
-                alt={`Logo ${brand}`}
-                loading="lazy"
-                className="h-10 md:h-12 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Brands Carousel (Social Proof) */}
+      <BrandsCarousel />
 
       {/* Servicios (Grid de Especialidades) */}
       <section id="servicios" className="py-24 bg-slate-50">

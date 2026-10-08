@@ -13,8 +13,48 @@ import EmergencyModal from "@/components/features/EmergencyModal";
 import PrivacyModal from "@/components/features/PrivacyModal";
 
 export const metadata: Metadata = {
-  title: `${SITE_CONFIG.name} | Servicio Técnico Automotriz`,
+  metadataBase: new URL(SITE_CONFIG.url),
+  title: {
+    default: `${SITE_CONFIG.name} | Servicio Técnico Automotriz`,
+    template: `%s | ${SITE_CONFIG.name}`
+  },
   description: SITE_CONFIG.description,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: `${SITE_CONFIG.name} | Servicio Técnico Automotriz`,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    locale: 'es_BO',
+    type: 'website',
+    images: [
+      {
+        url: '/hero-bg.jpg', // Usamos el hero como imagen al compartir
+        width: 1200,
+        height: 630,
+        alt: 'Taller Eléctrico y Electrónico TOLA - Cochabamba',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_CONFIG.name} | Servicio Técnico Automotriz`,
+    description: SITE_CONFIG.description,
+    images: ['/hero-bg.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

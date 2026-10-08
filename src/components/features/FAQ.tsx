@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     question: "¿Qué garantía tienen los trabajos electrónicos?",
-    answer: "Todos nuestros trabajos de reparación de módulos (ECUs), inmovilizadores y cableado cuentan con una garantía escrita de 3 a 6 meses, asegurando tu total tranquilidad."
+    answer: "Respaldamos todos nuestros servicios. Ante cualquier eventualidad o duda con la reparación, revisaremos tu vehículo en nuestras instalaciones para ofrecerte soporte técnico."
   }
 ];
 
